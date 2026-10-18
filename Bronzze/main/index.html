@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101113">
+    <title>Bronzze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <button class="icon-button" id="menu-button" aria-label="Open menu"><i
+                    class="fa-solid fa-bars"></i></button>
+            <h1>Bronzze<span>.</span></h1>
+        </div>
+        <button class="icon-button" id="settings-button" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+        <nav class="tools-menu" id="tools-menu" hidden>
+            <p>BRONZZE MENU</p>
+            <button data-view="home"><i class="fa-solid fa-house"></i> Home</button>
+            <button data-view="apps"><i class="fa-solid fa-layer-group"></i> Apps</button>
+            <button data-view="tasks"><i class="fa-solid fa-list-check"></i> Tasks</button>
+            <button data-view="notes"><i class="fa-solid fa-note-sticky"></i> Notes</button>
+            <button data-view="study"><i class="fa-solid fa-book-open"></i> Study</button>
+            <button data-view="settings"><i class="fa-solid fa-sliders"></i> Settings</button>
+        </nav>
+    </header>
+
+    <main class="workspace">
+        <section class="view home-view active" id="home-view">
+            <div class="home-inner">
+                <p class="eyebrow" id="greeting">YOUR SPACE ON THE WEB</p>
+                <div class="clock">
+                    <h2 id="clock-text">00:00</h2>
+                    <p id="date-text"></p>
+                </div>
+
+                <form class="search-bar" id="search-form">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="search-input" type="search" placeholder="Search the web or enter a URL..."
+                        autocomplete="off" aria-label="Search">
+                    <button type="submit" aria-label="Search"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+                <section class="home-section">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">YOUR FAVORITES</p>
+                            <h2>Quick reach<span>.</span></h2>
+                        </div>
+                        <button class="text-button" id="add-favorite">+ Add</button>
+                    </div>
+                    <div class="tile-grid" id="favorite-grid"></div>
+                </section>
+            </div>
+        </section>
+
+        <section class="view content-view" id="apps-view">
+            <div class="view-heading">
+                <p class="eyebrow">YOUR COLLECTION</p>
+                <h2>Apps<span>.</span></h2>
+                <p>Add websites to build your personal app launcher.</p>
+            </div>
+            <div class="toolbar">
+                <label class="search-small"><i class="fa-solid fa-magnifying-glass"></i><input id="app-search"
+                        type="search" placeholder="Find an app..." aria-label="Find an app"></label>
+                <button class="primary-button" id="add-app"><i class="fa-solid fa-plus"></i> Add app</button>
+            </div>
+            <div class="tile-grid app-grid" id="app-grid"></div>
+        </section>
+
+        <section class="view content-view" id="tasks-view">
+            <div class="view-heading">
+                <p class="eyebrow">STAY ON TRACK</p>
+                <h2>Tasks<span>.</span></h2>
+                <p>Your tasks are saved in this browser.</p>
+            </div>
+            <form class="entry-form" id="task-form">
+                <input id="task-input" placeholder="What do you need to do?" maxlength="200" required>
+                <button class="primary-button" type="submit"><i class="fa-solid fa-plus"></i> Add</button>
+            </form>
+            <div class="item-list" id="task-list"></div>
+        </section>
+
+        <section class="view content-view" id="notes-view">
+            <div class="view-heading">
+                <p class="eyebrow">YOUR THOUGHTS</p>
+                <h2>Notes<span>.</span></h2>
+                <p>Your notes save automatically in this browser.</p>
+            </div>
+            <textarea id="notes-editor" class="notes-editor" placeholder="Write something down..."></textarea>
+            <p class="muted save-status" id="notes-status">Saved on this device</p>
+        </section>
+
+        <section class="view content-view" id="study-view">
+            <div class="view-heading">
+                <p class="eyebrow">FOCUS MODE</p>
+                <h2>Study<span>.</span></h2>
+                <p>Choose a goal, start a timer, and focus for 25 minutes.</p>
+            </div>
+            <div class="study-fields">
+                <label>Subject<input id="study-subject" maxlength="100" placeholder="e.g. Science"></label>
+                <label>Study goal<input id="study-goal" maxlength="200"
+                        placeholder="e.g. Revise the water cycle"></label>
+            </div>
+            <div class="study-card">
+                <p class="eyebrow">FOCUS SESSION</p>
+                <h3 id="study-current-subject">Ready when you are.</h3>
+                <p id="study-current-goal" class="muted">Add a subject or goal to get started.</p>
+                <div id="study-timer" class="timer">25:00</div>
+                <div class="button-row">
+                    <button class="primary-button" id="study-start" type="button"><i class="fa-solid fa-play"></i> Start
+                        studying</button>
+                    <button class="secondary-button" id="study-reset" type="button"><i
+                            class="fa-solid fa-rotate-left"></i> Reset</button>
+                </div>
+                <p id="study-status" class="muted save-status">25-minute focus session</p>
+            </div>
+        </section>
+
+        <section class="view content-view" id="settings-view">
+            <div class="view-heading">
+                <p class="eyebrow">MAKE IT YOURS</p>
+                <h2>Settings<span>.</span></h2>
+                <p>Customize your Bronzze experience.</p>
+            </div>
+            <div class="settings-list">
+                <div class="setting">
+                    <div>
+                        <h3>Search engine</h3>
+                        <p>Choose where web searches open.</p>
+                    </div><select id="search-engine">
+                        <option value="google">Google</option>
+                        <option value="bing">Bing</option>
+                        <option value="duckduckgo">DuckDuckGo</option>
+                    </select>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Clock format</h3>
+                        <p>Choose 12-hour or 24-hour time.</p>
+                    </div><select id="clock-format">
+                        <option value="24">24-hour</option>
+                        <option value="12">12-hour</option>
+                    </select>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Accent color</h3>
+                        <p>Change Bronzze's highlight color.</p>
+                    </div><select id="accent-color">
+                        <option value="bronze">Classic bronze</option>
+                        <option value="butter">Buttery yellow</option>
+                        <option value="rose">Dusty rose</option>
+                        <option value="mint">Soft mint</option>
+                        <option value="blue">Slate blue</option>
+                    </select>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Compact mode</h3>
+                        <p>Reduce padding and tile sizes.</p>
+                    </div><label class="switch"><input id="compact-mode" type="checkbox" checked><span></span></label>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Show date</h3>
+                        <p>Show or hide the date under the clock.</p>
+                    </div><label class="switch"><input id="show-date" type="checkbox" checked><span></span></label>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Manage favorites</h3>
+                        <p>Remove individual favorites from Home.</p>
+                    </div><button class="secondary-button" id="manage-favorites">Manage</button>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Clear favorites</h3>
+                        <p>Remove all favorite shortcuts.</p>
+                    </div><button class="secondary-button" id="clear-favorites">Clear</button>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Clear apps</h3>
+                        <p>Remove all custom apps.</p>
+                    </div><button class="secondary-button" id="clear-apps">Clear</button>
+                </div>
+                <div class="setting">
+                    <div>
+                        <h3>Reset Bronzze</h3>
+                        <p>Reset saved preferences, shortcuts, tasks and notes.</p>
+                    </div><button class="danger-button" id="reset-all">Reset all</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="taskbar">
+        <nav class="taskbar-inner" aria-label="Main navigation">
+            <button class="taskbar-button active" data-view="home"><i
+                    class="fa-solid fa-house"></i><span>Home</span></button>
+            <button class="taskbar-button" data-view="apps"><i
+                    class="fa-solid fa-layer-group"></i><span>Apps</span></button>
+            <button class="taskbar-button" data-view="tasks"><i
+                    class="fa-solid fa-list-check"></i><span>Tasks</span></button>
+            <button class="taskbar-button" data-view="notes"><i
+                    class="fa-solid fa-note-sticky"></i><span>Notes</span></button>
+            <button class="taskbar-button" data-view="study"><i
+                    class="fa-solid fa-book-open"></i><span>Study</span></button>
+            <span class="taskbar-divider" aria-hidden="true"></span>
+            <div class="quick-tools-bar" id="quick-tools-bar"></div>
+            <button class="quick-add-button" id="add-tool" aria-label="Add quick-reach tool"
+                title="Add quick-reach tool"><i class="fa-solid fa-plus"></i></button>
+        </nav>
+        <div class="taskbar-branding">A Popkorn Kernel Product</div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>
